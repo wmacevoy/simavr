@@ -53,10 +53,10 @@ ifeq (${shell uname}, Darwin)
  # Thats for MacPorts libelf
  ifeq (${shell test -d /opt/local && echo Exists}, Exists)
   ifneq (${shell test -d /opt/local/avr && echo Exists}, Exists)
-   $(error Please install avr-gcc: port install avr-gcc avr-libc)
+   $(warning Please install avr-gcc: port install avr-gcc avr-libc)
   endif
   ifneq (${shell test -d /opt/local/include/libelf && echo Exists}, Exists)
-   $(error Please install libelf: port install libelf)
+   $(warning Please install libelf: port install libelf)
   endif
   CC		= clang
   IPATH		+= /opt/local/include /opt/local/include/libelf
@@ -67,10 +67,10 @@ ifeq (${shell uname}, Darwin)
   HOMEBREW_PREFIX ?= /usr/local
   ifeq (${shell test -d $(HOMEBREW_PREFIX)/Cellar && echo Exists}, Exists)
    ifneq (${shell test -d $(HOMEBREW_PREFIX)/Cellar/avr-gcc/ && echo Exists}, Exists)
-    $(error Please install avr-gcc: brew tap osx-cross/homebrew-avr ; brew install avr-libc)
+    $(warning Please install avr-gcc: brew tap osx-cross/homebrew-avr ; brew install avr-libc)
    endif
    ifneq (${shell test -d $(HOMEBREW_PREFIX)/Cellar/libelf/ && echo Exists}, Exists)
-    $(error Please install libelf: brew install libelf)
+    $(warning Please install libelf: brew install libelf)
    endif
    CC			= clang
    IPATH		+= $(HOMEBREW_PREFIX)/include
