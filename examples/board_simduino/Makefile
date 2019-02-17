@@ -31,7 +31,7 @@ VPATH += ../parts
 
 LDFLAGS += -lpthread -lutil
 
-include ../Makefile.opengl
+# include ../Makefile.opengl
 
 all: obj ${firmware} ${target}
 
