@@ -25,6 +25,7 @@ IPATH = .
 IPATH += ../parts
 IPATH += ${simavr}/include
 IPATH += ${simavr}/simavr/sim
+IPATH += ${simavr}/simavr
 
 VPATH = .
 VPATH += ../parts

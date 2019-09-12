@@ -288,6 +288,15 @@ uart_pty_connect(
 		uart_pty_t * p,
 		char uart)
 {
+  uart_pty_connect_basename(p,uart,"/tmp/simavr-uart");
+}
+
+void
+uart_pty_connect_basename(
+		uart_pty_t * p,
+		char uart,
+		const char *basename)
+{
 	// disable the stdio dump, as we are sending binary there
 	uint32_t f = 0;
 	avr_ioctl(p->avr, AVR_IOCTL_UART_GET_FLAGS(uart), &f);
@@ -309,7 +318,7 @@ uart_pty_connect(
 
 	for (int ti = 0; ti < 1; ti++) if (p->port[ti].s) {
 		char link[128];
-		sprintf(link, "/tmp/simavr-uart%s%c", ti == 1 ? "tap" : "", uart);
+		snprintf(link,sizeof(link), "%s%s%c", basename, ti == 1 ? "tap" : "", uart);
 		unlink(link);
 		if (symlink(p->port[ti].slavename, link) != 0) {
 			fprintf(stderr, "WARN %s: Can't create %s: %s", __func__, link, strerror(errno));
@@ -322,7 +331,8 @@ uart_pty_connect(
 		sprintf(cmd, "xterm -e picocom -b 115200 %s >/dev/null 2>&1 &",
 				p->tap.slavename);
 		system(cmd);
-	} else
+	} else {
 		printf("note: export SIMAVR_UART_XTERM=1 and install picocom to get a terminal\n");
+	}
 }
 

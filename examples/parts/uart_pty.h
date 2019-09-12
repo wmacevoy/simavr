@@ -72,5 +72,12 @@ void
 uart_pty_connect(
 		uart_pty_t * p,
 		char uart);
+/* basename = "/tmp/simavr-uart" */
+
+void
+uart_pty_connect_basename(
+		uart_pty_t * p,
+		char uart,
+		const char *basename);
 
 #endif /* __UART_PTY_H___ */
