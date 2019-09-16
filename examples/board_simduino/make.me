@@ -1,0 +1,10 @@
+CFLAGS=-g -I../../simavr -I../parts -I../../simavr/sim
+LDFLAGS=../../simavr/obj-x86_64-linux-gnu/libsimavr.a -lelf -lpthread -lutil
+
+uart_pty.o : ../parts/uart_pty.c
+	$(CC) -c $(CFLAGS) $<
+simduino.o : simduino.c
+	$(CC) -c $(CFLAGS) $<
+simduino : simduino.o uart_pty.o
+	$(CC) -o $@ $(CFLAGS) $^ $(LDFLAGS)
+

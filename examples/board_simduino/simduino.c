@@ -294,7 +294,7 @@ int simduino_init() {
     OPTION(0,"-ee","--eeprom", loadBase = AVR_SEGMENT_OFFSET_EEPROM);
     OPTION(0,"-ff","--flash",  loadBase = AVR_SEGMENT_OFFSET_FLASH);
     OPTION(1,"-u","--uart", snprintf(uart_basename, sizeof(uart_basename), "%s", OP(1)));
-    if (simduino_filename(OP(0))) {
+    if (!simduino_filename(OP(0))) {
       continue;
     }
     simduino_usage();
